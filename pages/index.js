@@ -1,3 +1,4 @@
+import { useState, useEffect } from "react";
 import Head from "next/head";
 import Header from "../components/Header";
 import Banner from "../components/Banner";
@@ -8,8 +9,26 @@ import LargeCard from "../components/LargeCard";
 import Footer from "../components/Footer";
 
 export default function Home({ exploreData, cardsData }) {
-  console.log(cardsData);
-  console.log(exploreData);
+  let listener = null;
+  const [scrollState, setScrollState] = useState("top");
+  useEffect(() => {
+    listener = document.addEventListener("scroll", (e) => {
+      var scrolled = document.scrollingElement.scrollTop;
+      if (scrolled >= 30) {
+        if (scrollState != "amir") {
+          setScrollState("amir");
+        }
+      } else {
+        if (scrollState != "top") {
+          setScrollState("top");
+        }
+      }
+    });
+    return () => {
+      document.removeEventListener("scroll", listener);
+    };
+  }, [scrollState]);
+
   return (
     <div className="">
       <Head>
@@ -17,8 +36,9 @@ export default function Home({ exploreData, cardsData }) {
       </Head>
 
       {/* BOTH HEADER AND BANNER  */}
-      <Header />
-      <Banner />
+      {/* {scrollState === "amir" && <Header background="white" />} */}
+      <Header scrollState={scrollState} />
+      <Banner scrollState={scrollState} />
 
       <main className="max-w-5xl mx-auto px-8 ">
         <section className="pt-5">
@@ -37,7 +57,7 @@ export default function Home({ exploreData, cardsData }) {
           </div>
         </section>
 
-        <section>
+        <section className="mt-3">
           <h2 className="text-2xl md:text-4xl font-semibold py-7">
             Live Anywhere
           </h2>

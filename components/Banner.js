@@ -5,14 +5,16 @@ import Header from "./Header";
 function Banner() {
   return (
     <div className="relative h-[300px] sm:h-[400px] lg:h-[550px]">
+      {/* {scrollState === "top" && (
+        <Header background="transparent" textColor="white" />
+      )} */}
       <Image
         src="https://a0.muscache.com/im/pictures/e4a2a61c-589f-4e49-b3b8-968a6bc23389.jpg?im_w=2560"
         alt="Olympic picture"
         layout="fill"
         objectFit="cover"
-        className="relative z-0"
       />
-      <div className="absolute top-1/3 ml-10 md:ml-20">
+      <div className="absolute top-1/4 ml-10 md:ml-20">
         <p className="sm:text-base lg:text-6xl font-bold text-white">
           Olympian &
         </p>
